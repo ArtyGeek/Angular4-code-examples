@@ -1,0 +1,16 @@
+<div class="container-lg">
+    <offer-header (toggleFilter)="toggleFilter()" [placeholder]="'Add offer'" (addOffer)="addOffer()"></offer-header>
+    <section class="main">
+        <offer-filter (onFilterChange)="onFilterChanged($event)" [isVisible]="isFilterVisible"></offer-filter>
+
+        <div *ngIf="displayType === 'blocks'" [class.invisible]="isFilterVisible" class="offer-holder offer-holder-horizontal">
+            <horizontal-offer *ngFor="let offer of offers" [model]="offer"></horizontal-offer>
+        </div>
+
+        <div *ngIf="displayType === 'grid'" [class.invisible]="isFilterVisible" class="offer-holder">
+            <vertical-offer *ngFor="let offer of offers" [model]="offer"></vertical-offer>
+        </div>
+    </section>
+
+    <pagination *ngIf="pageCount > 1" [pageNumber]="page" (pageNumberChange)="onPageChange($event)" [pageCount]="pageCount"></pagination>
+</div>
